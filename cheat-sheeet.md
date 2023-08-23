@@ -1,6 +1,7 @@
 [1. Git Commands](#10-git-commands)  
 [2. Vercel Commands: blogr-prisma](#20-vercel-commands)  
 [3. Amplification Tutorial Todo](#amplification-tutorial-todo)  
+[4. Docker commnands](#docker-commands)  
 [All Cloned Projects](#airbnb)
 
 # 1.0 Git Commands
@@ -148,3 +149,53 @@ pnpm i && pnpm dev
    `"postinstall":  "npm i --prefix web && npm i --prefix apps/todo-service-admin && npm i --prefix apps/todo-service"`
 10. Run `npm run postinstall`
 11. `npm install -D cross-env npm-run-all ` run this to run together react as well as amplication
+
+# Docker Commands
+
+      1. cd /path/to/getting-started-app
+
+      2. touch Dockerfile
+
+      3.
+      # syntax=docker/dockerfile:1
+
+      FROM node:18-alpine
+      WORKDIR /app
+      COPY . .
+      RUN yarn install --production
+      CMD ["node", "src/index.js"]
+      EXPOSE 3000
+
+      4. docker build -t getting-started .
+
+      5. docker run -dp 127.0.0.1:3000:3000 getting-started
+
+Modify, Build and Run again
+
+      - docker ps
+      - docker stop <the-container-id>
+      - docker rm <the-container-id>
+         or
+        docker rm -f <the-container-id>
+
+Push the docker image to docker hub repository
+
+      docker login -u satyanayakdocker
+      docker tag getting-started satyanayakdocker/getting-started
+      docker push satyanayakdocker/getting-started
+
+Dokcer with (Volume mount and Bind Mount)
+
+      docker volume create todo-db
+      docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
+
+      docker run -it --mount type=bind,src="$(pwd)",target=/src ubuntu bash
+
+Development Container
+
+      docker run -dp 127.0.0.1:3000:3000 \
+                  -w /app --mount type=bind,src="$(pwd)",target=/app \
+                  node:18-alpine \
+                  sh -c "yarn install && yarn run dev"
+
+      docker logs -f <container-id>
