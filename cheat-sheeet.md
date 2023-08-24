@@ -178,6 +178,8 @@ Modify, Build and Run again
          or
         docker rm -f <the-container-id>
 
+      - docker build -t getting-started .
+
 Push the docker image to docker hub repository
 
       docker login -u satyanayakdocker
@@ -199,3 +201,75 @@ Development Container
                   sh -c "yarn install && yarn run dev"
 
       docker logs -f <container-id>
+
+Multi-Container and Networking
+
+      1. docker network create todo-app
+      2. docker run -d  \
+               --network todo-app --network-alias mysql \
+               -v todo-mysql-data:/var/lib/mysql \
+               -e MYSQL_ROOT_PASSWORD=secret \
+               -e MYSQL_DATABASE=todos \
+               mysql:8.0
+      3. docker exec -it <mysql-container-id> mysql -u root -p
+               mysql> show databases;
+      4. docker run -it --network todo-app nicolaka/netshoot
+               > dig mysql
+
+
+      5. docker run -dp 127.0.0.1:3000:3000 \
+               -w /app -v "$(pwd):/app" \
+               --network todo-app \
+               -e MYSQL_HOST=mysql \
+               -e MYSQL_USER=root \
+               -e MYSQL_PASSWORD=secret \
+               -e MYSQL_DB=todos \
+               node:18-alpine \
+               sh -c "yarn install && yarn run dev"
+      6. docker logs -f <container-id>
+
+Docker Compose
+
+- Sample compose.yaml file at root directory of the aplication
+
+      services:
+            app:
+               image: node:18-alpine
+               command: sh -c "yarn install && yarn run dev"
+               ports:
+                  - 127.0.0.1:3000:3000
+               working_dir: /app
+               volumes:
+                     - ./:/app
+               environment:
+                     MYSQL_HOST: mysql
+                     MYSQL_USER: root
+                     MYSQL_PASSWORD: secret
+                      MYSQL_DB: todos
+            mysql:
+               image: mysql:8.0
+               volumes:
+                      - todo-mysql-data:/var/lib/mysql
+               environment:
+                      MYSQL_ROOT_PASSWORD: secret
+                      MYSQL_DATABASE: todos
+      volumes:
+            todo-mysql-data:
+
+To run the docker comoose.yaml
+
+      docker compose up -d
+
+To see the logs of all containers
+
+      docker compose logs -f
+      docker compose logs -f app
+      docker compose logs -f mysql
+
+To tear it all down
+
+      docker compose down
+
+Image building tips
+
+      docker image history getting-started
