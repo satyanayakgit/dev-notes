@@ -259,6 +259,8 @@ Docker Compose
 To run the docker comoose.yaml
 
       docker compose up -d
+      or
+      docker compose -f [FILE NAME] up -d
 
 To see the logs of all containers
 
@@ -273,3 +275,33 @@ To tear it all down
 Image building tips
 
       docker image history getting-started
+
+# POSTGRES set up
+
+[Refer to this blog for PgAdmin setup](https://betterprogramming.pub/create-a-private-postgresql-database-for-your-development-environment-in-seconds-b781640ed01b)
+
+      services:
+            postgres:
+                  image: postgres:15.4-alpine
+                  container_name: postgres-con
+                  restart: always
+                  volumes:
+                        - pgdata:/var/lib/postgresql/data
+                  ports:
+                        - 5432:5432
+                  environment:
+                        POSTGRES_PASSWORD: secret
+            adminer:
+                  image: adminer
+                  container_name: adminer-con
+                  restart: always
+                  ports:
+                        - 8080:8080
+      volumes:
+            pgdata:
+
+To run the above file
+
+      docker compose up -d
+
+      docker exec -it postgres-con psql -U postgres
