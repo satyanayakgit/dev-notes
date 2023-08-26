@@ -146,7 +146,7 @@ pnpm i && pnpm dev
 7. Do the setup in Amplication website and create the pull request
 8. Merge the pull request to main
 9. Run postinstall with the changes.  
-   `"postinstall":  "npm i --prefix web && npm i --prefix apps/todo-service-admin && npm i --prefix apps/todo-service"`
+   `"postinstall":  "npm i --prefix web && npm i --prefix server && npm i --prefix ui-admin"`
 10. Run `npm run postinstall`
 11. `npm install -D cross-env npm-run-all ` run this to run together react as well as amplication
 
