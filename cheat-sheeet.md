@@ -2,7 +2,17 @@
 [2. Vercel Commands: blogr-prisma](#20-vercel-commands)  
 [3. Amplification Tutorial Todo](#amplification-tutorial-todo)  
 [4. Docker commnands](#docker-commands)  
-[All Cloned Projects](#airbnb)
+[5. Amazon Clone](#amazon-clone)  
+[6.All Cloned Projects](#airbnb)  
+[7.zsh commands](#home)
+
+# Home
+
+      commands:
+
+             export PS1 = "%F{green}%~ %F{yellow}$(date "+%Y-%m-%d %H:%M:%S")%F{reset} $ "
+             export PS1="%F{green}%1~ %F{yellow}$(date "+%d-%b %H:%M:%S")%F{reset} $
+             export PS1="%F{green}%1~ %F{yellow}$(date "+%d-%b")%t%F{reset} $ "
 
 # 1.0 Git Commands
 
@@ -26,6 +36,8 @@
         git push -u origin main
         git push
         git remote set-url origin https://github.com/satyanayakgit/satya-nayak-blogr-prisma.git
+        git remote -v
+        git push
 
         git fetch origin
         git merge origin/main
@@ -305,3 +317,18 @@ To run the above file
       docker compose up -d
 
       docker exec -it postgres-con psql -U postgres
+
+# Amazon Clone
+
+[Go to Home](#home)
+
+      1. npx create-next-app@latest amazon-next
+      2. Remove the main component from src/pages/index.tsx and enter some text to test on localhost:3000.
+      3. Remove everything from src/styles/globals.css excluding tailwind imports. Now we ger a clean application.
+      4. Make Header.tsx in src/components/header/Header.tsx
+
+
+      Code
+
+            -     npm install react-icons --save
+            -     npm i react-responsive-carousel
