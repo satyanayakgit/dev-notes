@@ -28,19 +28,34 @@
 
   ### Code
 
-        git init
-        git add .
-        git status
-        git commit -m "first commit"
-        git remote add origin "https://github.com/satyanayakgit/blogr-prisma.git"
-        git push -u origin main
-        git push
-        git remote set-url origin https://github.com/satyanayakgit/satya-nayak-blogr-prisma.git
-        git remote -v
-        git push
+Initial Commit
 
-        git fetch origin
-        git merge origin/main
+            git init
+            git add .
+            git status
+            git commit -m "first commit"
+            git remote add origin "https://github.com/satyanayakgit/blogr-prisma.git"
+
+Set the Upstream
+
+            git push -u origin main
+            git push
+
+Change Remote URL
+
+          git remote set-url origin https://github.com/satyanayakgit/satya-nayak-blogr-prisma.git
+          git remote -v
+          git push
+
+Merge Branches
+
+      git fetch origin
+      git merge origin/main
+
+Compare branches
+
+      git diff local-branch..origin/remote-branch
+      git diff main..origin/mai
 
 ## 1.2 To do the git setup using gitconfig (make a video on this)
 
