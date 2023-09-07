@@ -14,6 +14,10 @@
              export PS1="%F{green}%1~ %F{yellow}$(date "+%d-%b %H:%M:%S")%F{reset} $
              export PS1="%F{green}%1~ %F{yellow}$(date "+%d-%b")%t%F{reset} $ "
 
+- For zsh you can open ~/.zshrc file and add the above line without export keyword and save. Then
+
+      source ./zshrc
+
 # 1.0 Git Commands
 
 ## 1.1 To push existing project into git
@@ -55,7 +59,7 @@ Merge Branches
 Compare branches
 
       git diff local-branch..origin/remote-branch
-      git diff main..origin/mai
+      git diff main..origin/main
 
 ## 1.2 To do the git setup using gitconfig (make a video on this)
 
@@ -347,3 +351,4 @@ To run the above file
 
             -     npm install react-icons --save
             -     npm i react-responsive-carousel
+            -     npm install @reduxjs/toolkit react-redux
